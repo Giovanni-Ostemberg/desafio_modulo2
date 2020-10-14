@@ -1,1 +1,29 @@
-<p>despesas works!</p>
+
+<nav><h3>Despesas dos Senadores - {{despesasSenador.nomeSenador}}</h3></nav>
+<div *ngFor="let tipo of despesasTipo">
+    {{tipo.nome}} - {{tipo.total}}
+</div>
+<div>{{totalGasto}}</div>
+
+<table mat-table class="lessons-table mat-elevation-z8" [dataSource]="despesas">
+    <ng-container class="tipo" matColumnDef="Tipo">
+        <th  *matHeaderCellDef>tipo</th>
+        <td  *matCellDef="let despesa"> {{identificarTipo(despesa.tipo)}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Fornecedor">
+        <th  *matHeaderCellDef>Fornecedor</th>
+        <td  class="description-cell" *matCellDef="let despesa"> {{despesa.fornec}} </td>
+      </ng-container>
+      <ng-container  matColumnDef="Data">
+        <th style="text-align: center;"  *matHeaderCellDef>Data</th>
+        <td   *matCellDef="let despesa">{{despesa.dia +"/"+ despesa.mes +"/"+ despesa.ano}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Valor">
+        <th  *matHeaderCellDef>Valor</th>
+        <td  *matCellDef="let despesa"> {{ despesa.valor}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<!-- <div *ngFor="let item of despesas">{{item.tipo}}</div> -->
